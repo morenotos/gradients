@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title> </title>
+
+<style>
+#grad1 {
+  height: 900px;
+  background-image: linear-gradient(to top, rgb(0, 0, 128), rgb(199, 21, 133));
+}
+
+* {
+  box-sizing: border-box;
+}
+
+/* Create two unequal columns that floats next to each other */
+.column {
+  float: left;
+  padding: 10px;
+
+}
+
+.left {
+  width: 25%;
+}
+
+.right {
+  width: 75%;
+}
+
+/* Clear floats after the columns */
+.row:after {
+  content: "";
+  display: table;
+  clear: both;
+}
+
+</style>
+
+</head>
+
+
+<body>
+
+<div class='row'>
+  <div class="column left" style="background-color:white;">
+    <h2>GRADIENT GENERATOR</h2>
+    <br>
+    <div>
+      <h3> Style </h3>
+      <button id ='linear' type="button" onclick="linearStyle()"> Linear </button>
+      <button id ='radial' type="button" onclick="radialStyle()"> Radial </button>
+    </div>
+    <br>
+    <div>
+      <h3> Direction </h3>
+      <button type="button" onclick="toRight()"> to right </button>
+      <button type="button" onclick="toLeft()"> to left </button>
+      <button type="button" onclick="toTop()"> to top </button>
+      <button type="button" onclick="toBottom()"> to bottom </button>
+    </div>
+    <br>
+    <h3> Color </h3>
+    <script src="jscolor.js"></script>
+    <button
+        class="jscolor {valueElement:null,value:'000080'}"
+        style="width:100px; height:30px;"
+        id='color1'
+        onchange="update(this.jscolor)">
+    </button>
+    <button
+        class="jscolor {valueElement:null,value:'C71585'}"
+        id='color2'
+        style="width:100px; height:30px;"
+        onchange="update(this.jscolor)">
+    </button>
+    <br>
+    <br>
+    <div>
+      <h3> Color code </h3>
+      <button type="button" onclick="RgbColor()"> Click to get the code </button>
+      <p id='colorFormat'> </p>
+    </div>
+  </div>
+  <div class="column right" style="background-color: white;">
+    <div id="grad1"></div>
+  </div>
+
+
+<script>
+
+function linearStyle() {
+  var color1 = document.getElementById('color1').style.backgroundColor;
+  var color2 = document.getElementById('color2').style.backgroundColor;
+  var style = 'linear-gradient(to top,';
+  document.getElementById('grad1').style.backgroundImage = style + color1 + ',' + color2 + ')';
+  console.log(document.getElementById('grad1').style.backgroundImage);
+  console.log(typeof(document.getElementById('grad1').style.backgroundImage));
+}
+
+function radialStyle() {
+  var style = 'radial-gradient';
+  var color1 = document.getElementById('color1').style.backgroundColor;
+  var color2 = document.getElementById('color2').style.backgroundColor;
+  document.getElementById('grad1').style.backgroundImage = style + '(at 0% 50%,' + color1 + ',' + color2 + ')';
+  console.log(document.getElementById('grad1').style.backgroundImage);
+}
+
+function toRight() {
+  var direction = 'to right';
+  var color1 = document.getElementById('color1').style.backgroundColor;
+  var color2 = document.getElementById('color2').style.backgroundColor;
+  var element = document.getElementById('grad1');
+  var currentStyle = window.getComputedStyle(element, null).backgroundImage;
+  console.log(currentStyle);
+  console.log(typeof(currentStyle));
+  if(currentStyle === 'linear-gradient(to top' + color1 + ',' + color2 + ')') {
+    element.style.backgroundImage = 'linear-gradient(' + direction + ',' + color1 + ',' + color2 + ')';
+  } else {
+    element.style.backgroundImage = 'radial-gradient(at 0% 50%,' + color1 + ',' + color2 + ')';
+  }
+  console.log(element.style.backgroundImage);
+  console.log(typeof(element.style.backgroundImage));
+}
+
+function toLeft() {
+  var direction = 'to left';
+  var color1 = document.getElementById('color1').style.backgroundColor;
+  var color2 = document.getElementById('color2').style.backgroundColor;
+  if(document.getElementById('grad1').style.backgroundImage == 'linear-gradient(to top,' + color1 + ',' + color2 + ')') {
+    document.getElementById('grad1').style.backgroundImage = 'linear-gradient(' + direction + ',' + color1 + ',' + color2 + ')';
+  } else {
+    document.getElementById('grad1').style.backgroundImage = 'radial-gradient(at 100% 50%,' + color1 + ',' + color2 + ')';
+  }
+}
+
+function toTop() {
+  var direction = 'to top';
+  var color1 = document.getElementById('color1').style.backgroundColor;
+  var color2 = document.getElementById('color2').style.backgroundColor;
+  if(document.getElementById('grad1').style.backgroundImage == 'linear-gradient(to top,' + color1 + ',' + color2 + ')') {
+    document.getElementById('grad1').style.backgroundImage = 'linear-gradient(' + direction + ',' + color1 + ',' + color2 + ')';
+  } else {
+    document.getElementById('grad1').style.backgroundImage = 'radial-gradient(at 50% 100%,' + color1 + ',' + color2 + ')';
+  }
+}
+
+function toBottom() {
+  var direction = 'to bottom';
+  var color1 = document.getElementById('color1').style.backgroundColor;
+  var color2 = document.getElementById('color2').style.backgroundColor;
+  if(document.getElementById('grad1').style.backgroundImage == 'linear-gradient(to top,' + color1 + ',' + color2 + ')') {
+    document.getElementById('grad1').style.backgroundImage = 'linear-gradient(' + direction + ',' + color1 + ',' + color2 + ')';
+  } else {
+    document.getElementById('grad1').style.backgroundImage = 'radial-gradient(at 50% 0%,' + color1 + ',' + color2 + ')';
+  }
+}
+
+function update(jscolor) {
+    // 'jscolor' instance can be used as a string
+    document.getElementById('grad1').style.backgroundImage = '#' + jscolor;
+}
+
+function RgbColor() {
+  var element = document.getElementById("grad1");
+  var style = window.getComputedStyle(element,"");
+  var color = style.getPropertyValue("background-image");
+  document.getElementById('colorFormat').innerHTML = 'background: ' + color;
+}
+
+
+
+</script>
+
+</body>
+</html>
