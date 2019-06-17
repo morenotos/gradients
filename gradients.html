@@ -6,7 +6,7 @@
 <style>
 #grad1 {
   height: 900px;
-  background-image: linear-gradient(to top, rgb(0, 0, 128), rgb(199, 21, 133));
+  background: linear-gradient(to top, rgb(0, 0, 128), rgb(199, 21, 133));
 }
 
 * {
@@ -78,11 +78,11 @@
     <br>
     <div>
       <h3> Color code </h3>
-      <button type="button" onclick="RgbColor()"> Click to get the code </button>
+      <!-- <button type="button" onclick="RgbColor()"> Click to get the code </button> -->
       <p id='colorFormat'> </p>
     </div>
   </div>
-  <div class="column right" style="background-color: white;">
+  <div class="column right" style="background-color:white;">
     <div id="grad1"></div>
   </div>
 
@@ -92,18 +92,17 @@
 function linearStyle() {
   var color1 = document.getElementById('color1').style.backgroundColor;
   var color2 = document.getElementById('color2').style.backgroundColor;
-  var style = 'linear-gradient(to top,';
-  document.getElementById('grad1').style.backgroundImage = style + color1 + ',' + color2 + ')';
-  console.log(document.getElementById('grad1').style.backgroundImage);
-  console.log(typeof(document.getElementById('grad1').style.backgroundImage));
+  var style = 'linear-gradient';
+  document.getElementById('grad1').style.backgroundImage = style + '(to top,' + color1 + ',' + color2 + ')';
+  RgbColor()
 }
 
 function radialStyle() {
   var style = 'radial-gradient';
   var color1 = document.getElementById('color1').style.backgroundColor;
   var color2 = document.getElementById('color2').style.backgroundColor;
-  document.getElementById('grad1').style.backgroundImage = style + '(at 0% 50%,' + color1 + ',' + color2 + ')';
-  console.log(document.getElementById('grad1').style.backgroundImage);
+  document.getElementById('grad1').style.backgroundImage = style + '(at 50% 50%,' + color1 + ',' + color2 + ')';
+  RgbColor()
 }
 
 function toRight() {
@@ -111,49 +110,63 @@ function toRight() {
   var color1 = document.getElementById('color1').style.backgroundColor;
   var color2 = document.getElementById('color2').style.backgroundColor;
   var element = document.getElementById('grad1');
-  var currentStyle = window.getComputedStyle(element, null).backgroundImage;
-  console.log(currentStyle);
-  console.log(typeof(currentStyle));
-  if(currentStyle === 'linear-gradient(to top' + color1 + ',' + color2 + ')') {
+  var string1 = element.style.backgroundImage.toString();
+  var substring1 = string1.substring(0,15);
+  var string2 = 'linear-gradient';
+  if(substring1 == string2) {
     element.style.backgroundImage = 'linear-gradient(' + direction + ',' + color1 + ',' + color2 + ')';
   } else {
     element.style.backgroundImage = 'radial-gradient(at 0% 50%,' + color1 + ',' + color2 + ')';
   }
-  console.log(element.style.backgroundImage);
-  console.log(typeof(element.style.backgroundImage));
+  RgbColor()
 }
 
 function toLeft() {
   var direction = 'to left';
   var color1 = document.getElementById('color1').style.backgroundColor;
   var color2 = document.getElementById('color2').style.backgroundColor;
-  if(document.getElementById('grad1').style.backgroundImage == 'linear-gradient(to top,' + color1 + ',' + color2 + ')') {
-    document.getElementById('grad1').style.backgroundImage = 'linear-gradient(' + direction + ',' + color1 + ',' + color2 + ')';
+  var element = document.getElementById('grad1');
+  var string1 = element.style.backgroundImage.toString();
+  var substring1 = string1.substring(0,15);
+  var string2 = 'linear-gradient';
+  if(substring1 == string2) {
+    element.style.backgroundImage = 'linear-gradient(' + direction + ',' + color1 + ',' + color2 + ')';
   } else {
-    document.getElementById('grad1').style.backgroundImage = 'radial-gradient(at 100% 50%,' + color1 + ',' + color2 + ')';
+    element.style.backgroundImage = 'radial-gradient(at 100% 50%,' + color1 + ',' + color2 + ')';
   }
+  RgbColor()
 }
 
 function toTop() {
   var direction = 'to top';
   var color1 = document.getElementById('color1').style.backgroundColor;
   var color2 = document.getElementById('color2').style.backgroundColor;
-  if(document.getElementById('grad1').style.backgroundImage == 'linear-gradient(to top,' + color1 + ',' + color2 + ')') {
-    document.getElementById('grad1').style.backgroundImage = 'linear-gradient(' + direction + ',' + color1 + ',' + color2 + ')';
+  var element = document.getElementById('grad1');
+  var string1 = element.style.backgroundImage.toString();
+  var substring1 = string1.substring(0,15);
+  var string2 = 'linear-gradient';
+  if(substring1 == string2) {
+    element.style.backgroundImage = 'linear-gradient(' + direction + ',' + color1 + ',' + color2 + ')';
   } else {
-    document.getElementById('grad1').style.backgroundImage = 'radial-gradient(at 50% 100%,' + color1 + ',' + color2 + ')';
+    element.style.backgroundImage = 'radial-gradient(at 50% 0%,' + color1 + ',' + color2 + ')';
   }
+  RgbColor()
 }
 
 function toBottom() {
   var direction = 'to bottom';
   var color1 = document.getElementById('color1').style.backgroundColor;
   var color2 = document.getElementById('color2').style.backgroundColor;
-  if(document.getElementById('grad1').style.backgroundImage == 'linear-gradient(to top,' + color1 + ',' + color2 + ')') {
-    document.getElementById('grad1').style.backgroundImage = 'linear-gradient(' + direction + ',' + color1 + ',' + color2 + ')';
+  var element = document.getElementById('grad1');
+  var string1 = element.style.backgroundImage.toString();
+  var substring1 = string1.substring(0,15);
+  var string2 = 'linear-gradient';
+  if(substring1 == string2) {
+    element.style.backgroundImage = 'linear-gradient(' + direction + ',' + color1 + ',' + color2 + ')';
   } else {
-    document.getElementById('grad1').style.backgroundImage = 'radial-gradient(at 50% 0%,' + color1 + ',' + color2 + ')';
+    element.style.backgroundImage = 'radial-gradient(at 50% 100%,' + color1 + ',' + color2 + ')';
   }
+  RgbColor()
 }
 
 function update(jscolor) {
